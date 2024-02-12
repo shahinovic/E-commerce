@@ -14,15 +14,15 @@ import {
   FaYoutube,
 } from "react-icons/fa";
 import { freshcart_logo } from "../../assets";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const MainNavbar = () => {
   return (
     <BNav expand="lg" className="bg-body-tertiary">
-      <Container fluid>
-        <BNav.Brand href="#">
+      <Container>
+        <NavLink to="home" className="navbar-brand">
           <img src={freshcart_logo} alt="" />
-        </BNav.Brand>
+        </NavLink>
         <BNav.Toggle aria-controls="navbarScroll" />
         <BNav.Collapse id="navbarScroll">
           <Nav
@@ -30,19 +30,19 @@ const MainNavbar = () => {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <NavLink className="nav-link" to="">
+            <NavLink className="nav-link" to="home">
               Home
             </NavLink>
             <NavLink className="nav-link" to="cart">
               Cart
             </NavLink>
-            <NavLink className="nav-link" to="home-page">
+            <NavLink className="nav-link" to="products">
               Products
             </NavLink>
-            <NavLink className="nav-link" to="">
+            <NavLink className="nav-link" to="categories">
               Categories
             </NavLink>
-            <NavLink className="nav-link" to="">
+            <NavLink className="nav-link" to="brands">
               Brands
             </NavLink>
           </Nav>
@@ -68,12 +68,12 @@ const MainNavbar = () => {
               </a>
             </div>
             <div className="user-actions d-flex gap-3">
-              <a href="#" className="nav-link">
+              <Link to={"/"} className="nav-link">
                 Login
-              </a>
-              <a href="#" className="nav-link">
+              </Link>
+              <Link to={"/register"} className="nav-link">
                 Register
-              </a>
+              </Link>
             </div>
           </div>
         </BNav.Collapse>

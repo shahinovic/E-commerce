@@ -6,11 +6,9 @@ import {
   HomePage,
   LayOut,
   Login,
-  NotFound,
-  Payment,
-  ProductDetails,
   Products,
   Register,
+  NotFound,
 } from "./components";
 
 export const routes = createBrowserRouter([
@@ -22,10 +20,8 @@ export const routes = createBrowserRouter([
       { path: "register", element: <Register /> },
       { path: "home", element: <HomePage /> },
       { path: "products", element: <Products /> },
-      { path: "product-details", element: <ProductDetails /> },
       { path: "cart", element: <Cart /> },
       { path: "brands", element: <Brands /> },
-      { path: "payment", element: <Payment /> },
       { path: "categories", element: <Categories /> },
       { path: "*", element: <NotFound /> },
     ],

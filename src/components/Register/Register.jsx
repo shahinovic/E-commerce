@@ -3,15 +3,44 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import axios from "axios";
 import { Button, Container } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { ScaleLoader } from "react-spinners";
 
 const { main_section_style, input_group, alert } = styles;
 
 const Register = () => {
-  // const []
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const baseUrl = `https://ecommerce.routemisr.com`;
+  const navigate = useNavigate();
+  const submitForm = async (values) => {
+    try {
+      setIsLoading(true);
+      const { data } = await axios.post(
+        baseUrl + "/api/v1/auth/signup",
+        values
+      );
+      console.log("🚀 ~ onSubmit={ ~ data:", data);
+      if (data.message === "success") {
+        navigate("/");
+      }
+      setIsLoading(false);
+      setErrorMessage("");
+    } catch (error) {
+      setIsLoading(false);
+      setErrorMessage(error.response.data.message);
+    }
+  };
   return (
     <div className={`register ${main_section_style}`}>
       <Container>
         <h1>Register</h1>
+        {errorMessage && (
+          <div className="alert alert-danger" role="alert">
+            {errorMessage}
+          </div>
+        )}
 
         <Formik
           initialValues={{
@@ -31,17 +60,7 @@ const Register = () => {
               .required()
               .matches(/^\d{11}$/),
           })}
-          onSubmit={async (values) => {
-            try {
-              const { data } = await axios.post(
-                "https://ecommerce.routemisr.com/api/v1/auth/signup",
-                values
-              );
-              console.log("🚀 ~ onSubmit={ ~ data:", data);
-            } catch (error) {
-              console.log("🚀 ~ onSubmit={ ~ error:", error);
-            }
-          }}
+          onSubmit={(values) => submitForm(values)}
         >
           {({
             values,
@@ -56,7 +75,7 @@ const Register = () => {
             <>
               <form
                 onSubmit={handleSubmit}
-                className="d-flex flex-column gap-3"
+                className="d-flex flex-column gap-3 "
               >
                 <div className={input_group}>
                   <label htmlFor="name"> Name :</label>
@@ -156,9 +175,9 @@ const Register = () => {
                   type="submit"
                   variant="success"
                   size="lg"
-                  disabled={!isValid && dirty}
+                  disabled={!isValid || !dirty || isLoading}
                 >
-                  Register
+                  {isLoading ? <ScaleLoader color="#fff" /> : "Register"}
                 </Button>
               </form>
             </>

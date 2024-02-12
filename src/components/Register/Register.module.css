@@ -1,7 +1,7 @@
 .main_section_style {
   background-color: #f0f3f2;
-  /* background-color: black !important; */
-  /* min-height: calc(100vh - 60px); */
+  height: calc(calc(100vh - 60px) - 10vh);
+  padding: 3rem;
   color: #0aad0a;
 }
 
