@@ -14,9 +14,21 @@ import {
   FaYoutube,
 } from "react-icons/fa";
 import { freshcart_logo } from "../../assets";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
+import { useContext } from "react";
+import { TokenContext } from "../../Context/Token";
 
 const MainNavbar = () => {
+  const { token, setToken } = useContext(TokenContext);
+  console.log("🚀 ~ MainNavbar ~ token:", token);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setToken(null);
+  };
+
+  const currentPath = useLocation().pathname;
+
   return (
     <BNav expand="lg" className="bg-body-tertiary">
       <Container>
@@ -25,28 +37,34 @@ const MainNavbar = () => {
         </NavLink>
         <BNav.Toggle aria-controls="navbarScroll" />
         <BNav.Collapse id="navbarScroll">
-          <Nav
-            className="me-auto my-2 my-lg-0"
-            style={{ maxHeight: "100px" }}
-            navbarScroll
+          {token && (
+            <Nav
+              className="me-auto my-2 my-lg-0"
+              style={{ maxHeight: "100px" }}
+              navbarScroll
+            >
+              <NavLink className="nav-link" to="home">
+                Home
+              </NavLink>
+              <NavLink className="nav-link" to="cart">
+                Cart
+              </NavLink>
+              <NavLink className="nav-link" to="products">
+                Products
+              </NavLink>
+              <NavLink className="nav-link" to="categories">
+                Categories
+              </NavLink>
+              <NavLink className="nav-link" to="brands">
+                Brands
+              </NavLink>
+            </Nav>
+          )}
+          <div
+            className={`actions ${
+              !token ? "ms-auto" : "ms-0"
+            } d-flex align-items-center gap-3 justify-content-end`}
           >
-            <NavLink className="nav-link" to="home">
-              Home
-            </NavLink>
-            <NavLink className="nav-link" to="cart">
-              Cart
-            </NavLink>
-            <NavLink className="nav-link" to="products">
-              Products
-            </NavLink>
-            <NavLink className="nav-link" to="categories">
-              Categories
-            </NavLink>
-            <NavLink className="nav-link" to="brands">
-              Brands
-            </NavLink>
-          </Nav>
-          <div className="actions d-flex align-items-center gap-3 justify-content-end">
             <div className="social-links d-flex gap-3">
               <a href="#" className="nav-link">
                 <FaInstagram />
@@ -68,12 +86,23 @@ const MainNavbar = () => {
               </a>
             </div>
             <div className="user-actions d-flex gap-3">
-              <Link to={"/"} className="nav-link">
-                Login
-              </Link>
-              <Link to={"/register"} className="nav-link">
-                Register
-              </Link>
+              {token ? (
+                <Link to="/" className="nav-link" onClick={handleLogout}>
+                  Logout
+                </Link>
+              ) : (
+                <>
+                  {currentPath === "/register" ? (
+                    <Link to={"/"} className="nav-link">
+                      Login
+                    </Link>
+                  ) : (
+                    <Link to={"/register"} className="nav-link">
+                      Register
+                    </Link>
+                  )}
+                </>
+              )}
             </div>
           </div>
         </BNav.Collapse>

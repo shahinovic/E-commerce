@@ -3,14 +3,16 @@ import * as yup from "yup";
 import styles from "./Login.module.css";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
 import { ScaleLoader } from "react-spinners";
+import { TokenContext } from "../../Context/Token";
 const { main_section_style } = styles;
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const { setToken } = useContext(TokenContext);
   const baseUrl = `https://ecommerce.routemisr.com`;
 
   const navigate = useNavigate();
@@ -24,11 +26,11 @@ const Login = () => {
 
       if (data.message === "success") {
         localStorage.setItem("token", data.token);
+        setToken(data);
         navigate("/home");
       }
       setIsLoading(false);
       setErrorMessage("");
-      console.log("🚀 ~ formSubmit ~ data:", data);
     } catch (error) {
       setIsLoading(false);
       setErrorMessage(error.response.data.message);
