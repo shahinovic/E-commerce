@@ -9,21 +9,82 @@ import {
   Products,
   Register,
   NotFound,
+  ProtectedRoutes,
 } from "./components";
 
-export const routes = createBrowserRouter([
+const routesConfig = [
   {
     path: "",
     element: <LayOut />,
     children: [
-      { index: true, element: <Login /> },
-      { path: "register", element: <Register /> },
-      { path: "home", element: <HomePage /> },
-      { path: "products", element: <Products /> },
-      { path: "cart", element: <Cart /> },
-      { path: "brands", element: <Brands /> },
-      { path: "categories", element: <Categories /> },
-      { path: "*", element: <NotFound /> },
+      {
+        index: true,
+        element: (
+          <ProtectedRoutes>
+            <Login />
+          </ProtectedRoutes>
+        ),
+      },
+      {
+        path: "register",
+        element: (
+          <ProtectedRoutes>
+            {" "}
+            <Register />
+          </ProtectedRoutes>
+        ),
+      },
+      {
+        path: "home",
+        element: (
+          <ProtectedRoutes>
+            <HomePage />
+          </ProtectedRoutes>
+        ),
+      },
+      {
+        path: "products",
+        element: (
+          <ProtectedRoutes>
+            <Products />
+          </ProtectedRoutes>
+        ),
+      },
+      {
+        path: "cart",
+        element: (
+          <ProtectedRoutes>
+            {" "}
+            <Cart />
+          </ProtectedRoutes>
+        ),
+      },
+      {
+        path: "brands",
+        element: (
+          <ProtectedRoutes>
+            <Brands />
+          </ProtectedRoutes>
+        ),
+      },
+      {
+        path: "categories",
+        element: (
+          <ProtectedRoutes>
+            <Categories />
+          </ProtectedRoutes>
+        ),
+      },
+      {
+        path: "*",
+        element: (
+          <ProtectedRoutes>
+            <NotFound />
+          </ProtectedRoutes>
+        ),
+      },
     ],
   },
-]);
+];
+
+export const routes = createBrowserRouter(routesConfig);

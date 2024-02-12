@@ -10,6 +10,7 @@ import { default as NotFound } from "./NotFound/NotFound";
 import { default as Products } from "./Products/Products";
 import { default as Categories } from "./Categories/Categories";
 import { default as Brands } from "./Brands/Brands";
+import { default as ProtectedRoutes } from "./ProtectedRoutes/ProtectedRoutes";
 
 export {
   LayOut,
@@ -23,5 +24,6 @@ export {
   Products,
   Categories,
   Brands,
+  ProtectedRoutes,
   NotFound,
 };

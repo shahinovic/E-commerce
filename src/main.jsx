@@ -5,13 +5,16 @@ import "./index.css";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import TokenContextProvider from "./Context/Token.jsx";
 import CounterContextProvider from "./Context/Counter.jsx";
+import UserContextProvider from "./Context/User.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <TokenContextProvider>
-      <CounterContextProvider>
-        <App />
-      </CounterContextProvider>
-    </TokenContextProvider>
+    <UserContextProvider>
+      <TokenContextProvider>
+        <CounterContextProvider>
+          <App />
+        </CounterContextProvider>
+      </TokenContextProvider>
+    </UserContextProvider>
   </React.StrictMode>
 );

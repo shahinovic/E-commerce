@@ -13,6 +13,9 @@ const LayOut = () => {
       navigate("/home");
       setToken(localStorage.getItem("token"));
     }
+    //  else {
+    //   navigate("/");
+    // }
   }, []);
   return (
     <div className="layout">
