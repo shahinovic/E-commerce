@@ -1,0 +1,17 @@
+.main_slider {
+  width: calc(100vw - 20px);
+  margin-inline: auto;
+  /* height: 30vh !important; */
+}
+
+.btn_none {
+  height: 100%;
+}
+
+.btn_none > button {
+  display: none !important;
+}
+
+.btn_none > div {
+  overflow: hidden !important;
+}
