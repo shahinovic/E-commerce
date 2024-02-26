@@ -1,9 +1,15 @@
 import { Container } from "react-bootstrap";
 import MainSlider from "../MainSlider/MainSlider";
 import CategoriesSlider from "../CategoriesSlider/CategoriesSlider";
+import FeatureProducts from "../FeatureProducts/FeatureProducts";
 import { Helmet } from "react-helmet";
+import { UserContext } from "../../Context/User";
+import { useContext } from "react";
+import Products from "../Products/Products";
 
 const HomePage = () => {
+  const { baseUrl } = useContext(UserContext);
+
   return (
     <div className="home ">
       <Helmet>
@@ -15,6 +21,7 @@ const HomePage = () => {
       <Container>
         <MainSlider />
         <CategoriesSlider />
+        <Products />
       </Container>
     </div>
   );

@@ -4,6 +4,7 @@ import Slider from "react-slick";
 
 const CategoriesSlider = () => {
   const [categories, setCategories] = useState([]);
+
   const getCategories = async () => {
     const { data } = await axios.get(
       "https://route-ecommerce.onrender.com/api/v1/categories"
@@ -27,7 +28,7 @@ const CategoriesSlider = () => {
       <Slider {...settings}>
         {categories.map((category) => (
           <div
-            key={category.id}
+            key={category._id}
             className=" px-1 text-center"
             style={{ height: "200px", overflow: "hidden" }}
           >

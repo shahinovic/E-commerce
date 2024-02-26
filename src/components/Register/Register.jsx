@@ -21,7 +21,7 @@ const Register = () => {
         baseUrl + "/api/v1/auth/signup",
         values
       );
-      console.log("🚀 ~ onSubmit={ ~ data:", data);
+
       if (data.message === "success") {
         navigate("/");
       }

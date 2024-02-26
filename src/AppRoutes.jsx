@@ -10,35 +10,41 @@ import {
   Register,
   NotFound,
   ProtectedRoutes,
+  ProductDetails,
+  Allorders,
 } from "./components";
+import { Suspense } from "react";
+import Loader from "./components/Loader/Loader";
 
 const routesConfig = [
   {
-    path: "",
+    path: "/",
     element: <LayOut />,
     children: [
       {
         index: true,
+
         element: (
-          <ProtectedRoutes>
+          <Suspense fallback={<Loader />}>
             <Login />
-          </ProtectedRoutes>
+          </Suspense>
         ),
       },
       {
         path: "register",
         element: (
-          <ProtectedRoutes>
-            {" "}
+          <Suspense fallback={<Loader />}>
             <Register />
-          </ProtectedRoutes>
+          </Suspense>
         ),
       },
       {
         path: "home",
         element: (
           <ProtectedRoutes>
-            <HomePage />
+            <Suspense fallback={<Loader />}>
+              <HomePage />
+            </Suspense>
           </ProtectedRoutes>
         ),
       },
@@ -51,11 +57,22 @@ const routesConfig = [
         ),
       },
       {
+        path: "/productDetails/:id",
+        element: (
+          <ProtectedRoutes>
+            <Suspense fallback={<Loader />}>
+              <ProductDetails />
+            </Suspense>
+          </ProtectedRoutes>
+        ),
+      },
+      {
         path: "cart",
         element: (
           <ProtectedRoutes>
-            {" "}
-            <Cart />
+            <Suspense fallback={<Loader />}>
+              <Cart />
+            </Suspense>
           </ProtectedRoutes>
         ),
       },
@@ -63,7 +80,9 @@ const routesConfig = [
         path: "brands",
         element: (
           <ProtectedRoutes>
-            <Brands />
+            <Suspense fallback={<Loader />}>
+              <Brands />
+            </Suspense>
           </ProtectedRoutes>
         ),
       },
@@ -71,7 +90,20 @@ const routesConfig = [
         path: "categories",
         element: (
           <ProtectedRoutes>
-            <Categories />
+            <Suspense fallback={<Loader />}>
+              <Categories />
+            </Suspense>
+          </ProtectedRoutes>
+        ),
+      },
+
+      {
+        path: "allorders",
+        element: (
+          <ProtectedRoutes>
+            <Suspense fallback={<Loader />}>
+              <Allorders />
+            </Suspense>
           </ProtectedRoutes>
         ),
       },
@@ -79,7 +111,9 @@ const routesConfig = [
         path: "*",
         element: (
           <ProtectedRoutes>
-            <NotFound />
+            <Suspense fallback={<Loader />}>
+              <NotFound />
+            </Suspense>
           </ProtectedRoutes>
         ),
       },

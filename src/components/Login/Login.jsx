@@ -7,15 +7,18 @@ import { useContext, useState } from "react";
 import axios from "axios";
 import { ScaleLoader } from "react-spinners";
 import { TokenContext } from "../../Context/Token";
+import { UserContext } from "../../Context/User";
 const { main_section_style } = styles;
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const { setToken } = useContext(TokenContext);
-  const baseUrl = `https://ecommerce.routemisr.com`;
+  const { baseUrl } = useContext(UserContext);
+  // const baseUrl = `https://ecommerce.routemisr.com`;
 
   const navigate = useNavigate();
+
   const formSubmit = async (values) => {
     try {
       setIsLoading(true);

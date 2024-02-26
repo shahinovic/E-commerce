@@ -2,13 +2,14 @@ import { Helmet } from "react-helmet";
 
 const Categories = () => {
   return (
-    <div>
+    <section className="sec">
       <Helmet>
         <meta charSet="utf-8" />
         <title>Categories</title>
         <link rel="canonical" href="http://mysite.com/example" />
       </Helmet>
-    </div>
+      <h1>Categories</h1>
+    </section>
   );
 };
 

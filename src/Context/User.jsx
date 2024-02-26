@@ -7,8 +7,12 @@ const UserProviderContext = ({ children }) => {
   const token = localStorage.getItem("token");
 
   const [user, setUser] = useState(token ? jwtDecode(token) : null);
+  const baseUrl = `https://ecommerce.routemisr.com`;
+  const [isCartOpen, setIsCartOpen] = useState(false);
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider
+      value={{ user, setUser, baseUrl, isCartOpen, setIsCartOpen }}
+    >
       {children}
     </UserContext.Provider>
   );

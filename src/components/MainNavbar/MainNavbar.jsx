@@ -12,15 +12,19 @@ import {
   FaTiktok,
   FaTwitter,
   FaYoutube,
+  FaShoppingCart,
 } from "react-icons/fa";
 import { freshcart_logo } from "../../assets";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useContext } from "react";
 import { TokenContext } from "../../Context/Token";
+import { UserContext } from "../../Context/User";
+import { useGetCart } from "../../Hooks/useCart";
 
 const MainNavbar = () => {
   const { token, setToken } = useContext(TokenContext);
-  console.log("🚀 ~ MainNavbar ~ token:", token);
+  const { setIsCartOpen } = useContext(UserContext);
+  const { data } = useGetCart();
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -30,7 +34,7 @@ const MainNavbar = () => {
   const currentPath = useLocation().pathname;
 
   return (
-    <BNav expand="lg" className="bg-body-tertiary">
+    <BNav expand="lg" className="bg-body-tertiary fixed-top top-0 shadow ">
       <Container>
         <NavLink to="home" className="navbar-brand">
           <img src={freshcart_logo} alt="" />
@@ -46,9 +50,9 @@ const MainNavbar = () => {
               <NavLink className="nav-link" to="home">
                 Home
               </NavLink>
-              <NavLink className="nav-link" to="cart">
+              {/* <NavLink className="nav-link" to="cart">
                 Cart
-              </NavLink>
+              </NavLink> */}
               <NavLink className="nav-link" to="products">
                 Products
               </NavLink>
@@ -87,9 +91,27 @@ const MainNavbar = () => {
             </div>
             <div className="user-actions d-flex gap-3">
               {token ? (
-                <Link to="/" className="nav-link" onClick={handleLogout}>
-                  Logout
-                </Link>
+                <>
+                  <Link
+                    to="/"
+                    className="nav-link d-flex align-items-center  me-2"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </Link>
+
+                  <button
+                    onClick={() => setIsCartOpen(true)}
+                    className="btn cart_btn"
+                  >
+                    {data?.numOfCartItems > 0 && (
+                      <span className="cart_count bg-main">
+                        {data?.numOfCartItems}
+                      </span>
+                    )}
+                    <FaShoppingCart />
+                  </button>
+                </>
               ) : (
                 <>
                   {currentPath === "/register" ? (

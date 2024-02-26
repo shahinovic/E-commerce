@@ -10,6 +10,7 @@ import { default as banner_4 } from "./images/banner-4.jpeg";
 import { default as light_patten } from "./images/light-patten.svg";
 import { default as freshcart_logo } from "./images/freshcart-logo.svg";
 import { default as error } from "./images/error.svg";
+import { default as cart_is_empty } from "./images/cart_is_empty.png";
 
 export {
   slider_1,
@@ -24,4 +25,5 @@ export {
   light_patten,
   freshcart_logo,
   error,
+  cart_is_empty,
 };
