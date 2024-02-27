@@ -1,6 +1,6 @@
 .main_section_style {
   background-color: #f0f3f2;
-  height: calc(calc(100vh - 60px) - 10vh);
+  /* height: calc(calc(100vh - 60px) - 10vh); */
   padding: 3rem;
   color: #0aad0a;
   display: grid;

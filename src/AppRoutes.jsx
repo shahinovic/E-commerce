@@ -12,6 +12,7 @@ import {
   ProtectedRoutes,
   ProductDetails,
   Allorders,
+  ForgotPassword,
 } from "./components";
 import { Suspense } from "react";
 import Loader from "./components/Loader/Loader";
@@ -52,7 +53,9 @@ const routesConfig = [
         path: "products",
         element: (
           <ProtectedRoutes>
-            <Products />
+            <Suspense fallback={<Loader />}>
+              <Products />
+            </Suspense>
           </ProtectedRoutes>
         ),
       },
@@ -105,6 +108,14 @@ const routesConfig = [
               <Allorders />
             </Suspense>
           </ProtectedRoutes>
+        ),
+      },
+      {
+        path: "forgot-password",
+        element: (
+          <Suspense fallback={<Loader />}>
+            <ForgotPassword />
+          </Suspense>
         ),
       },
       {

@@ -11,15 +11,13 @@ import {
 } from "../../Hooks/useWishList";
 
 const Product = ({ product, wishListData }) => {
-  console.log("🚀 ~ Product ~ wishListData:", wishListData);
-
   const [heartActive, setHeartActive] = useState(
     wishListData?.data?.data?.find((ele) => ele._id === product._id) !==
       undefined
       ? true
       : false
   );
-  console.log("🚀 ~ Product ~ heartActive:", heartActive);
+
   const { mutate } = useCartCrud(addToCart);
   const { mutate: wishListAddBtn } = useChangeWishList(addToWishList);
   const { mutate: wishListRemoveBtn } = useChangeWishList(removeFromWishList);

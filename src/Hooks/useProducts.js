@@ -19,3 +19,11 @@ export const useProducts = (
     ...options,
     select: sele,
   });
+
+export const useProduct = ({ id, fn }) => {
+  return useQuery({
+    queryKey: ["product", id],
+    queryFn: () => fn(id),
+    select: (data) => data.data.data,
+  });
+};

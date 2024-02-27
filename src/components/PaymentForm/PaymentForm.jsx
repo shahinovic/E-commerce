@@ -14,19 +14,16 @@ const PaymentForm = ({ checkOutId }) => {
       ...shippingAddress,
       [e.target.name]: e.target.value,
     });
-    console.log(shippingAddress);
   };
 
   const { mutate, data } = useCartCrud(checkout);
-  console.log("🚀 ~ PaymentForm ~ data:", data?.data?.session?.url);
 
   return (
     <div className={styles.PaymentForm}>
       <form
-        onSubmit={async (e) => {
+        onSubmit={(e) => {
           e.preventDefault();
           mutate({ id: checkOutId, shippingAddress });
-
           if (data?.data?.status === "success") {
             window.location.href = data?.data?.session?.url;
           }

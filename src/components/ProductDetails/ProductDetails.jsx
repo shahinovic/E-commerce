@@ -1,8 +1,7 @@
-import { useContext } from "react";
 import { Helmet } from "react-helmet";
 import { useParams } from "react-router-dom";
-import { UserContext } from "../../Context/User";
-import { getProduct, useProducts } from "../../Hooks/useProducts";
+
+import { getProduct, useProduct } from "../../Hooks/useProducts";
 import { FaStar } from "react-icons/fa";
 import Loader from "../Loader/Loader";
 import { addToCart, useCartCrud } from "../../Hooks/useCart";
@@ -10,17 +9,13 @@ import { addToCart, useCartCrud } from "../../Hooks/useCart";
 const ProductDetails = () => {
   const { id } = useParams();
 
-  const { data, isLoading, isError } = useProducts(
-    `product`,
-    () => getProduct(id),
-    {
-      staleTime: 1000,
-    }
-  );
+  const { data, isLoading, isError } = useProduct({
+    id,
+    fn: getProduct,
+  });
 
   const { mutate } = useCartCrud(addToCart);
 
-  console.log("🚀 ~ ProductDetails ~ data:", data);
   if (isLoading) return <Loader />;
   if (isError) return <h2>{isError}</h2>;
 

@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import styles from "./Login.module.css";
 import { Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import axios from "axios";
 import { ScaleLoader } from "react-spinners";
@@ -52,7 +52,7 @@ const Login = () => {
     }),
   });
   return (
-    <div className={`login ${main_section_style}`}>
+    <section className={`login sec ${main_section_style}`}>
       <form onSubmit={formik.handleSubmit} className="d-flex flex-column">
         <h1>Login</h1>
         {errorMessage && (
@@ -98,6 +98,11 @@ const Login = () => {
             </div>
           )}
         </div>
+
+        <Link className="mb-2 text-main" to="/forgot-password">
+          Forget Password?
+        </Link>
+
         <Button
           variant="success"
           type="submit"
@@ -106,7 +111,7 @@ const Login = () => {
           {isLoading ? <ScaleLoader color="white" /> : "Login"}
         </Button>
       </form>
-    </div>
+    </section>
   );
 };
 

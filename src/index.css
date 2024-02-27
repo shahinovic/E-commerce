@@ -20,6 +20,11 @@ body {
   min-height: calc(80vh - 80px);
 }
 
+section.sec.app_loader {
+  display: grid;
+  place-items: center;
+}
+
 .layout footer {
   height: 20vh;
 }
@@ -145,4 +150,11 @@ a:hover {
 .cart_products {
   height: 80vh;
   overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.wishlist_products {
+  height: 85vh;
+  overflow-y: auto;
+  overflow-x: hidden;
 }

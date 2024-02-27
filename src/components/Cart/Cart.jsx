@@ -12,15 +12,16 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import Loader from "../Loader/Loader.jsx";
 import CheckOutModel from "../CheckOutModel/CheckOutModel.jsx";
 import { cart_is_empty } from "../../assets/index.js";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const { isCartOpen, setIsCartOpen } = useContext(UserContext);
   const cartStyle = {
     position: "fixed",
     top: "0",
-    right: isCartOpen ? "0" : "-40vw",
+    right: isCartOpen ? "0" : "-55vw",
     height: "100vh",
-    width: "30vw",
+    width: "50vw",
     backgroundColor: "#F4F5F7",
     zIndex: "9999",
     transition: "all 0.5s ease",
@@ -45,25 +46,22 @@ const Cart = () => {
   }, []);
 
   const { data, isLoading, isError } = useGetCart();
-  console.log("🚀 ~ Cart ~ data_id:", data);
 
   const { mutate: deleteItem } = useCartCrud(deleteCart);
 
   const { mutate: updateItem, isPending: disablenBtn } =
     useCartCrud(updateCart);
 
-  // const { mutate: clear } = useCartCrud(clearCart);
-
-  // if (isLoading)
-  //   return (
-  //     <aside
-  //       ref={cartRef}
-  //       style={cartStyle}
-  //       className="cart px-3 text-center py-5"
-  //     >
-  //       <Loader />
-  //     </aside>
-  //   );
+  if (isLoading)
+    return (
+      <aside
+        ref={cartRef}
+        style={cartStyle}
+        className="cart px-3 text-center py-5"
+      >
+        <Loader />
+      </aside>
+    );
   if (isError || !data || data?.data?.products?.length === 0) {
     return (
       <aside ref={cartRef} style={cartStyle} className="cart px-3">
@@ -84,7 +82,7 @@ const Cart = () => {
         <Close />
       </button>
 
-      <div className="d-flex flex-column align-items-center gap-3">
+      <div className="d-flex flex-column align-items-center">
         <h3>Shop Cart:</h3>
         {data && (
           <p className="text-main">
@@ -93,15 +91,20 @@ const Cart = () => {
         )}
         <div className="cart_products">
           {data?.data?.products?.map((product, index) => (
-            <div key={product._id} className="row bg-white rounded ">
+            <div
+              key={product._id}
+              className="row bg-white rounded mb-2 px-2 py-1"
+            >
               <div className="col-md-2">
-                <img
-                  src={product.product.imageCover}
-                  className="w-100"
-                  alt={product.product.title}
-                />
+                <Link to={`/productDetails/${product?.product._id}`}>
+                  <img
+                    src={product.product.imageCover}
+                    className="w-100"
+                    alt={product.product.title}
+                  />
+                </Link>
               </div>
-              <div className="col-md-7">
+              <div className="col-md-6 d-flex flex-column justify-content-center align-items-center">
                 <p>{product.product.title}</p>
                 <p className="text-main mb-0">{product.price}</p>
                 <button

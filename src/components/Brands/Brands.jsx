@@ -11,13 +11,12 @@ const Brands = () => {
     return axios.get(`${baseUrl}/api/v1/brands`);
   };
 
-  const { data, refetch } = useQuery({
+  const { data } = useQuery({
     queryKey: ["brands"],
     queryFn: getBrands,
     select: (data) => data.data.data,
-    enabled: false,
   });
-  console.log("🚀 ~ Brands ~ data:", data);
+
   return (
     <section className="sec">
       <Helmet>
@@ -25,14 +24,16 @@ const Brands = () => {
         <title>Brands</title>
         <link rel="canonical" href="http://mysite.com/example" />
       </Helmet>
-      <h2 onClick={refetch}>Brands</h2>
       <div className="container">
-        <div className="row">
-          {data?.map((brand) => (
-            <div key={brand._id} className="col-md-3">
-              <img src={brand.image} alt="" />
-            </div>
-          ))}
+        <h2>Brands</h2>
+        <div className="container">
+          <div className="row">
+            {data?.map((brand) => (
+              <div key={brand._id} className="col-md-3">
+                <img src={brand.image} alt="" />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

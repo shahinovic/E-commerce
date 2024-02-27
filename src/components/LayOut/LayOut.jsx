@@ -4,12 +4,13 @@ import Footer from "../Footer/Footer";
 import { useContext, useEffect } from "react";
 import { TokenContext } from "../../Context/Token";
 import Cart from "../Cart/Cart";
+import WishList from "../WishList/WishList";
 
 const LayOut = () => {
   const { setToken } = useContext(TokenContext);
   const navigate = useNavigate();
   const location = useLocation();
-  console.log("🚀 ~ LayOut ~ location:", location);
+  console.log("🚀 ~ LayOut ~ location:", location.pathname);
 
   useEffect(() => {
     if (localStorage.getItem("token") && location.pathname !== "/allorders") {
@@ -21,6 +22,7 @@ const LayOut = () => {
     <div className="layout " style={{ paddingTop: "80px" }}>
       <MainNavbar />
       <Cart />
+      <WishList />
       <Outlet />
       <Footer />
     </div>

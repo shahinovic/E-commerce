@@ -41,6 +41,10 @@ export const useCartCrud = (fn) => {
     onSuccess: (data) => {
       toast.success(data.data.message);
       queryClient.invalidateQueries({ queryKey: ["cart"] });
+
+      if (data.data.session.mode === "payment") {
+        window.location.href = data.data.session.url;
+      }
     },
     onError: (data) => {
       toast.error(data.response.data.message);

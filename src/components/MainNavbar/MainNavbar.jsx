@@ -13,6 +13,7 @@ import {
   FaTwitter,
   FaYoutube,
   FaShoppingCart,
+  FaHeart,
 } from "react-icons/fa";
 import { freshcart_logo } from "../../assets";
 import { Link, NavLink, useLocation } from "react-router-dom";
@@ -20,11 +21,15 @@ import { useContext } from "react";
 import { TokenContext } from "../../Context/Token";
 import { UserContext } from "../../Context/User";
 import { useGetCart } from "../../Hooks/useCart";
+import { getWishList, useGetWishList } from "../../Hooks/useWishList";
 
 const MainNavbar = () => {
   const { token, setToken } = useContext(TokenContext);
-  const { setIsCartOpen } = useContext(UserContext);
+  const { setIsCartOpen, setIsWishListOpen } = useContext(UserContext);
+
   const { data } = useGetCart();
+  const { data: wishListData } = useGetWishList(getWishList);
+  console.log("🚀 ~ MainNavbar ~ wishListData:", wishListData?.data?.count);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -110,6 +115,18 @@ const MainNavbar = () => {
                       </span>
                     )}
                     <FaShoppingCart />
+                  </button>
+
+                  <button
+                    className="btn cart_btn"
+                    onClick={() => setIsWishListOpen(true)}
+                  >
+                    {wishListData?.data?.count > 0 && (
+                      <span className="cart_count bg-main">
+                        {wishListData?.data?.count}
+                      </span>
+                    )}
+                    <FaHeart />
                   </button>
                 </>
               ) : (
