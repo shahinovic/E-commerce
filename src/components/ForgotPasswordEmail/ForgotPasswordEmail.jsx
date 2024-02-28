@@ -5,8 +5,8 @@ import toast from "react-hot-toast";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
-const ForgotPasswordEmail = ({ setIsRest, setIsEmail }) => {
-  const { data, mutate, error } = useMutation({
+const ForgotPasswordEmail = ({ setIsRest, setIsEmail, setUserEmail }) => {
+  const { mutate } = useMutation({
     mutationFn: (email) => {
       return axios.post(
         `https://ecommerce.routemisr.com/api/v1/auth/forgotPasswords`,
@@ -15,19 +15,15 @@ const ForgotPasswordEmail = ({ setIsRest, setIsEmail }) => {
     },
     select: (data) => data,
     onError: (error) => {
-      console.log("🚀 ~ ForgotPassword ~ error:", error);
-
       toast.error(error.response.data.message);
     },
     onSuccess: (data) => {
-      console.log("🚀 ~ ForgotPassword ~ data:", data);
       toast.success(data.data.message);
       setIsRest(true);
       setIsEmail(false);
     },
   });
-  console.log("🚀 ~ ForgotPassword ~ data:", data);
-  console.log("🚀 ~ ForgotPassword ~ error:", error);
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -36,6 +32,7 @@ const ForgotPasswordEmail = ({ setIsRest, setIsEmail }) => {
       email: yup.string().email().required(),
     }),
     onSubmit: (values) => {
+      setUserEmail(values.email);
       mutate(values.email);
     },
   });
@@ -44,7 +41,7 @@ const ForgotPasswordEmail = ({ setIsRest, setIsEmail }) => {
       <h1 className="mt-5">
         Enter the email address associated with your account
       </h1>
-      <form className="my-5  text-center">
+      <form className="my-5  ">
         <label className="fs-5 fw-bold text-main mb-3" htmlFor="email">
           Enter Your Email
         </label>

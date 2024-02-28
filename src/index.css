@@ -26,7 +26,8 @@ section.sec.app_loader {
 }
 
 .layout footer {
-  height: 20vh;
+  min-height: 20vh;
+  background-color: #f0f3f2;
 }
 .rating-color {
   color: var(--rating-color);
@@ -157,4 +158,18 @@ a:hover {
   height: 85vh;
   overflow-y: auto;
   overflow-x: hidden;
+}
+
+.payment_parameters .img-container {
+  max-width: 70px;
+}
+
+.other_links {
+  border: 1px solid transparent;
+  border-top-color: rgba(128, 128, 128, 0.479);
+  border-bottom-color: rgba(128, 128, 128, 0.479);
+}
+
+.phone_apps .img-container {
+  max-width: 80px;
 }

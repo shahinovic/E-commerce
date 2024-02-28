@@ -22,7 +22,6 @@ const VerifyResetCode = ({ setIsVerify, setIsRest }) => {
       toast.error(error.response.data.message);
     },
     onSuccess: (data) => {
-      console.log("🚀 ~ VerifyResetCode ~ data:", data);
       toast.success(data.data.message);
 
       if (data.data.status === "Success") {
@@ -32,8 +31,6 @@ const VerifyResetCode = ({ setIsVerify, setIsRest }) => {
     },
   });
 
-  console.log("🚀 ~ VerifyResetCode ~ data.data.status:", data?.data?.status);
-
   const handleFormSubmit = (e) => {
     e.preventDefault();
     mutate(resetCode);
@@ -41,10 +38,13 @@ const VerifyResetCode = ({ setIsVerify, setIsRest }) => {
   return (
     <div className={styles.VerifyResetCode}>
       <h1 className="mt-5">Verify Reset Code </h1>
-      <p className="mt-5">Enter the verification code sent to your email</p>
 
       <form onSubmit={handleFormSubmit}>
+        <label className="fs-5 fw-bold text-main mb-3" htmlFor="resetCode">
+          Enter the verification code sent to your email
+        </label>
         <input
+          id="resetCode"
           type="text"
           className="form-control mb-3"
           placeholder="Enter verification code"

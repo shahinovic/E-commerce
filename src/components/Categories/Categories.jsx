@@ -13,7 +13,7 @@ const Categories = () => {
   });
 
   return (
-    <section className="sec">
+    <section className="sec pb-5">
       <Helmet>
         <meta charSet="utf-8" />
         <title>Categories</title>
@@ -21,7 +21,7 @@ const Categories = () => {
       </Helmet>
 
       <div className="container">
-        <h1>Categories</h1>
+        <h1>Our Categories</h1>
         <div className="row g-4">
           {data?.map((category) => (
             <div key={category._id} className="col-md-3">

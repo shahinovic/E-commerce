@@ -29,7 +29,6 @@ const MainNavbar = () => {
 
   const { data } = useGetCart();
   const { data: wishListData } = useGetWishList(getWishList);
-  console.log("🚀 ~ MainNavbar ~ wishListData:", wishListData?.data?.count);
 
   const handleLogout = () => {
     localStorage.removeItem("token");

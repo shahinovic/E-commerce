@@ -10,7 +10,6 @@ const LayOut = () => {
   const { setToken } = useContext(TokenContext);
   const navigate = useNavigate();
   const location = useLocation();
-  console.log("🚀 ~ LayOut ~ location:", location.pathname);
 
   useEffect(() => {
     if (localStorage.getItem("token") && location.pathname !== "/allorders") {

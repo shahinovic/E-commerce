@@ -11,6 +11,12 @@ import { default as light_patten } from "./images/light-patten.svg";
 import { default as freshcart_logo } from "./images/freshcart-logo.svg";
 import { default as error } from "./images/error.svg";
 import { default as cart_is_empty } from "./images/cart_is_empty.png";
+import { default as amazon_pay } from "./images/amazon_pay.png";
+import { default as AMEX } from "./images/AMEX.png";
+import { default as stripe } from "./images/stripe.png";
+import { default as visa } from "./images/visa.png";
+import { default as google_play } from "./images/google_play.png";
+import { default as app_store } from "./images/app_store.png";
 
 export {
   slider_1,
@@ -26,4 +32,10 @@ export {
   freshcart_logo,
   error,
   cart_is_empty,
+  amazon_pay,
+  AMEX,
+  stripe,
+  visa,
+  google_play,
+  app_store,
 };
