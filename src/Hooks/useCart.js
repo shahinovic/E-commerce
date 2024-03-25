@@ -52,9 +52,9 @@ export const useCartCrud = (fn) => {
   });
 };
 
-export const checkout = ({ id, shippingAddress }) => {
+export const checkout = ({ id, shippingAddress, url }) => {
   return axios.post(
-    `${baseUrl}/api/v1/orders/checkout-session/${id}?url=http://localhost:5173`,
+    `${baseUrl}/api/v1/orders/checkout-session/${id}?url=${url}`,
     { shippingAddress },
     { headers: { token } }
   );

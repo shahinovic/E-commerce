@@ -23,7 +23,11 @@ const PaymentForm = ({ checkOutId }) => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          mutate({ id: checkOutId, shippingAddress });
+          mutate({
+            id: checkOutId,
+            shippingAddress,
+            url: window.location.origin,
+          });
           if (data?.data?.status === "success") {
             window.location.href = data?.data?.session?.url;
           }
